@@ -8,5 +8,6 @@ import { LoggerApiService } from './services/logger.service';
   imports: [],
   controllers: [],
   providers: [ClsService, PrismaService, TransactionService, LoggerApiService],
+  exports: [ClsService, PrismaService, TransactionService, LoggerApiService],
 })
 export class SharedModule {}
