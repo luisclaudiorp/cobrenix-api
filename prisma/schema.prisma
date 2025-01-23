@@ -1,0 +1,96 @@
+datasource db {
+  url      = env("DATABASE_URL")
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Users {
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  name        String?
+  password    String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
+
+  companies   Companies[]
+
+  @@map("users")
+}
+
+model Companies {
+  id          Int @id @default(autoincrement())
+  name        String
+  email       String   @unique
+
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
+
+  users       Users[]
+  products    Products[]
+  customers   Customers[]
+
+  @@map("companies")
+}
+
+model Products {
+  id          Int @id @default(autoincrement())
+  name        String
+  value       Float
+  companyId   Int @map("company_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
+
+  company     Companies @relation(fields: [companyId], references: [id])
+  SingleSales SingleSales[]
+  Subscriptions Subscriptions[]
+
+  @@map("products")
+}
+
+model Customers {
+  id          Int @id @default(autoincrement())
+  name        String
+  email       String   @unique
+  password    String
+  companyId   Int @map("company_id")
+
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
+
+  company     Companies @relation(fields: [companyId], references: [id])
+  singleSales SingleSales[]
+  Subscriptions Subscriptions[]
+
+  @@map("customers")
+}
+
+model SingleSales {
+  id          Int @id @default(autoincrement())
+  name        String
+  value       Float
+  customerId  Int @map("customer_id")
+
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
+
+  products    Products[]
+  customers   Customers @relation(fields: [customerId], references: [id])
+  @@map("single_sales")
+}
+
+model Subscriptions {
+  id          Int @id @default(autoincrement())
+  name        String
+  value       Float
+  customerId  Int @map("customer_id")
+
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @map("updated_at")
+
+  products    Products[]
+  customers   Customers @relation(fields: [customerId], references: [id])
+  @@map("subscriptions")
+}
