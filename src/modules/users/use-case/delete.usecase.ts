@@ -17,7 +17,7 @@ export class DeleteUseCase {
         throw new NotFoundException('User not found');
       }
 
-      return await this.userService.delete(id);
+      return await this.userService.update(id, { active: false });
     } catch (error) {
       this.logger.warn('Error to delete user', error);
       throw error;
