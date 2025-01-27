@@ -12,6 +12,8 @@ model Users {
   email       String   @unique
   name        String?
   password    String
+  active      Boolean  @default(true)
+
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @map("updated_at")
 
@@ -24,6 +26,7 @@ model Companies {
   id          Int @id @default(autoincrement())
   name        String
   email       String   @unique
+  active      Boolean  @default(true)
 
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @map("updated_at")
@@ -40,6 +43,8 @@ model Products {
   name        String
   value       Float
   companyId   Int @map("company_id")
+  active      Boolean  @default(true)
+
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @map("updated_at")
 
@@ -56,6 +61,7 @@ model Customers {
   email       String   @unique
   password    String
   companyId   Int @map("company_id")
+  active      Boolean  @default(true)
 
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @map("updated_at")
@@ -72,6 +78,7 @@ model SingleSales {
   name        String
   value       Float
   customerId  Int @map("customer_id")
+  active      Boolean  @default(true)
 
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @map("updated_at")
@@ -86,7 +93,8 @@ model Subscriptions {
   name        String
   value       Float
   customerId  Int @map("customer_id")
-
+  active      Boolean  @default(true)
+  
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @map("updated_at")
 
