@@ -33,22 +33,22 @@ export class UsersController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    this.transactionService.run(() => {
-      return this.createUseCase.execute(createUserDto);
-    });
+    return this.transactionService.run(() =>
+      this.createUseCase.execute(createUserDto),
+    );
   }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    this.transactionService.run(() => {
-      return this.updateUseCase.execute(Number(id), updateUserDto);
-    });
+    return this.transactionService.run(() =>
+      this.updateUseCase.execute(Number(id), updateUserDto),
+    );
   }
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    this.transactionService.run(() => {
-      return this.deleteUseCase.execute(Number(id));
-    });
+    return this.transactionService.run(() =>
+      this.deleteUseCase.execute(Number(id)),
+    );
   }
 }
