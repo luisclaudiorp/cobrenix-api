@@ -10,8 +10,13 @@ export class FindAllUseCase {
     this.logger = new Logger(FindAllUseCase.name);
   }
   async execute(query: FindAllUserDto) {
-    const data = this.createQuery(query);
-    return await this.userService.findAll(data);
+    try {
+      const data = this.createQuery(query);
+      return await this.userService.findAll(data);
+    } catch (error) {
+      this.logger.error(error);
+      throw error;
+    }
   }
 
   private createQuery(query: FindAllUserDto): Prisma.UsersWhereInput {
