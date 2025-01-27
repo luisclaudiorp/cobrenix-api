@@ -20,7 +20,7 @@ export class FindAllUseCase {
   }
 
   private createQuery(query: FindAllUserDto): Prisma.UsersWhereInput {
-    const { name, email, id } = query;
+    const { name, email, id, active } = query;
 
     const where = {} as Prisma.UsersWhereInput;
 
@@ -34,6 +34,12 @@ export class FindAllUseCase {
 
     if (id) {
       where.id = { equals: id };
+    }
+
+    if (active == undefined) {
+      where.active = { equals: true };
+    } else {
+      where.active = { equals: active };
     }
 
     this.logger.log('findAll', { where });

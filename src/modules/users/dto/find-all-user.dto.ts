@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class FindAllUserDto {
   @IsString()
@@ -14,4 +14,9 @@ export class FindAllUserDto {
   @IsOptional()
   @Transform(({ value }) => Number(value))
   id: number;
+
+  @IsBoolean()
+  @IsOptional()
+  @Transform(({ value }) => (value === 'true' ? true : false))
+  active: boolean;
 }
