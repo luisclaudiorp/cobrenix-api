@@ -7,7 +7,7 @@ export class ProductsRepository {
     constructor(private readonly prismaService: PrismaService) {}
 
     async findAll(data: Prisma.ProductsWhereInput) {
-        return [this.prismaService.getClient().products.findMany({ where: data })];
+        return this.prismaService.getClient().products.findMany({ where: data });
     }
 
     async findById(id: number) {
