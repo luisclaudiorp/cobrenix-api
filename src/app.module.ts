@@ -6,7 +6,13 @@ import { CompaniesModule } from './modules/companies/companies.module';
 import { ProductsModule } from './modules/products/products.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), SharedModule, UsersModule, CompaniesModule, ProductsModule],
+  imports: [
+    ConfigModule.forRoot(),
+    SharedModule,
+    UsersModule,
+    CompaniesModule,
+    ProductsModule,
+  ],
   controllers: [],
   providers: [],
 })

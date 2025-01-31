@@ -1,12 +1,21 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from "@nestjs/common";
-import { TransactionService } from "src/shared/services/transaction.service";
-import { FindAllUseCase } from "./use-case/find-all.usecase";
-import { CreateUseCase } from "./use-case/create.usecase";
-import { UpdateUseCase } from "./use-case/update.usecase";
-import { DeleteUseCase } from "./use-case/delete.usecase";
-import { FindAllProductsDto } from "./dto/find-all-products.dto";
-import { CreateProductsDto } from "./dto/create-products.dto";
-import { UpdateProductsDto } from "./dto/update-products.dto";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
+import { TransactionService } from 'src/shared/services/transaction.service';
+import { FindAllUseCase } from './use-case/find-all.usecase';
+import { CreateUseCase } from './use-case/create.usecase';
+import { UpdateUseCase } from './use-case/update.usecase';
+import { DeleteUseCase } from './use-case/delete.usecase';
+import { FindAllProductsDto } from './dto/find-all-products.dto';
+import { CreateProductsDto } from './dto/create-products.dto';
+import { UpdateProductsDto } from './dto/update-products.dto';
 
 @Controller('products')
 export class ProductsController {

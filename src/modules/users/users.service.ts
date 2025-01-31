@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { FindAllUserDto } from './dto/find-all-user.dto';
 import { UserRespository } from './repository/user.respository';
 import { Prisma } from '@prisma/client';
 

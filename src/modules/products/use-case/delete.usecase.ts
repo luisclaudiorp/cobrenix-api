@@ -1,12 +1,12 @@
-import { Injectable, Logger, NotFoundException } from "@nestjs/common";
-import { ProductsService } from "../products.service";
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { ProductsService } from '../products.service';
 
 @Injectable()
 export class DeleteUseCase {
-    logger: Logger;
-    constructor(private readonly productsService: ProductsService) {
-      this.logger = new Logger(DeleteUseCase.name);
-    }
+  logger: Logger;
+  constructor(private readonly productsService: ProductsService) {
+    this.logger = new Logger(DeleteUseCase.name);
+  }
 
   async execute(id: number) {
     try {

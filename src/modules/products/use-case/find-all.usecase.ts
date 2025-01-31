@@ -1,11 +1,11 @@
-import { Injectable, Logger } from "@nestjs/common";
-import { ProductsService } from "../products.service";
-import { FindAllProductsDto } from "../dto/find-all-products.dto";
-import { Prisma } from "@prisma/client";
+import { Injectable, Logger } from '@nestjs/common';
+import { ProductsService } from '../products.service';
+import { FindAllProductsDto } from '../dto/find-all-products.dto';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class FindAllUseCase {
-    private logger: Logger;
+  private logger: Logger;
   constructor(private readonly productsService: ProductsService) {
     this.logger = new Logger(FindAllUseCase.name);
   }
