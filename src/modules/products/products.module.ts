@@ -1,10 +1,17 @@
 import { Module } from "@nestjs/common";
 import { SharedModule } from "src/shared/shared.module";
+import { ProductsController } from "./products.controller";
+import { ProductsService } from "./products.service";
+import { ProductsRepository } from "./repository/products.repository";
+import { FindAllUseCase } from "./use-case/find-all.usecase";
+import { CreateUseCase } from "./use-case/create.usecase";
+import { UpdateUseCase } from "./use-case/update.usecase";
+import { DeleteUseCase } from "./use-case/delete.usecase";
 
 @Module({
     imports: [SharedModule],
-    controllers: [],
-    providers: [],
+    controllers: [ProductsController],
+    providers: [ProductsService, ProductsRepository, FindAllUseCase, CreateUseCase, UpdateUseCase, DeleteUseCase],
     exports: [],
 })
 export class ProductsModule {}
