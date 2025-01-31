@@ -1,4 +1,4 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { BadRequestException, Injectable, Logger } from "@nestjs/common";
 import { ProductsService } from "../products.service";
 import { CreateProductsDto } from "../dto/create-products.dto";
 
@@ -12,7 +12,14 @@ export class CreateUseCase {
   async execute(createProductsDto: CreateProductsDto) {
     try {
       this.logger.log('createProductsDto', createProductsDto);
-        return await this.productsService.create(createProductsDto);
+
+      const foundCompany = await this.productsService.findById(createProductsDto.companyId);
+
+      if (!foundCompany) {
+        throw new BadRequestException('Company not found');
+      }
+
+      return await this.productsService.create(createProductsDto);
     } catch (error) {
       this.logger.warn('Error to create new product', error);
       throw error;
