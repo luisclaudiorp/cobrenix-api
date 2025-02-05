@@ -53,8 +53,6 @@ export class UpdateUseCase {
         password: password && hashPassword(password),
       };
 
-      this.logger.warn('Error to update new user', customerToUpdate);
-
       return await this.customersService.update(id, customerToUpdate);
     } catch (error) {
       this.logger.warn('Error updating customer', error);
