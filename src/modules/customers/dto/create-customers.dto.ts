@@ -1,6 +1,6 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-export class CreateCompaniesDto {
+export class CreateCustomersDto {
   @IsString()
   name: string;
 
@@ -15,4 +15,8 @@ export class CreateCompaniesDto {
   @IsNotEmpty()
   @IsString()
   repetedPassword: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  companyId: number;
 }
