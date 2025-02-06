@@ -1,0 +1,12 @@
+import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
+import { PrismaService } from 'src/shared/services/prisma.service';
+
+@Injectable()
+export class SingleSalesRepository {
+  constructor(private readonly prismaService: PrismaService) {}
+
+  async create(data: Prisma.SingleSalesUncheckedCreateInput) {
+    return this.prismaService.getClient().singleSales.create({ data });
+  }
+}
