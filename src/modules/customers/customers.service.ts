@@ -14,6 +14,10 @@ export class CustomersService {
     return await this.customersRepository.findById(id);
   }
 
+  async findActiveById(id: number) {
+    return await this.customersRepository.findActiveById(id);
+  }
+
   async findByEmail(email: string) {
     return await this.customersRepository.findByEmail(email);
   }

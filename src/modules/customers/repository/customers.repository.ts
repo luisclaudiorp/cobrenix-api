@@ -22,6 +22,12 @@ export class CustomersRepository {
       .customers.findUnique({ where: { id } });
   }
 
+  async findActiveById(id: number) {
+    return this.prismaService
+      .getClient()
+      .customers.findUnique({ where: { id, active: true } });
+  }
+
   async create(data: Prisma.CustomersUncheckedCreateInput) {
     return this.prismaService.getClient().customers.create({ data });
   }

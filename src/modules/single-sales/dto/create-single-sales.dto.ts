@@ -20,5 +20,5 @@ export class CreateSingleSalesDto {
 
   @IsNotEmpty()
   @IsNumber({}, { each: true })
-  productId: number[];
+  productIds: number[];
 }
