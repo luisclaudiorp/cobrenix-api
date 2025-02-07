@@ -4,6 +4,7 @@ import { CompaniesService } from 'src/modules/companies/companies.service';
 import { CustomersService } from 'src/modules/customers/customers.service';
 import { ProductsService } from 'src/modules/products/products.service';
 import { SingleSalesService } from '../single-sales.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class CreateUseCase {
@@ -27,7 +28,20 @@ export class CreateUseCase {
         createSingleSalesDto.productIds,
       );
 
-      return await this.singleSalesService.create(createSingleSalesDto);
+      for (const productId of createSingleSalesDto.productIds) {
+        const data: Prisma.SingleSalesUncheckedCreateInput = {
+          companyId: createSingleSalesDto.companyId,
+          customerId: createSingleSalesDto.customerId,
+          discount: createSingleSalesDto.discount,
+          name: createSingleSalesDto.name,
+          value: createSingleSalesDto.value,
+          products: {
+            connect: { id: productId },
+          },
+        };
+
+        await this.singleSalesService.create(data);
+      }
     } catch (error) {
       this.logger.warn('Error to create new single sales', error);
       throw error;

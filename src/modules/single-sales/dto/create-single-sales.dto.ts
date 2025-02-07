@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsArray, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateSingleSalesDto {
   @IsString()
@@ -20,5 +21,6 @@ export class CreateSingleSalesDto {
 
   @IsNotEmpty()
   @IsNumber({}, { each: true })
+  @IsArray()
   productIds: number[];
 }
