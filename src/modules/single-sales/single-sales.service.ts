@@ -9,4 +9,12 @@ export class SingleSalesService {
   async create(data: Prisma.SingleSalesUncheckedCreateInput) {
     return this.singleSalesRepository.create(data);
   }
+
+  async findAll(data: Prisma.SingleSalesWhereInput) {
+    return this.singleSalesRepository.findAll(data);
+  }
+
+  async findById(id: number) {
+    return this.singleSalesRepository.findById(id);
+  }
 }

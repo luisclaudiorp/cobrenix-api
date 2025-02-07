@@ -7,11 +7,17 @@ import { CustomersModule } from '../customers/customers.module';
 import { ProductsModule } from '../products/products.module';
 import { SingleSalesService } from './single-sales.service';
 import { SingleSalesRepository } from './repository/single-sales.repository';
+import { FindAllUseCase } from './use-case/find-all.usecase';
 
 @Module({
   imports: [SharedModule, CompaniesModule, CustomersModule, ProductsModule],
   controllers: [SingleSalesController],
-  providers: [CreateUseCase, SingleSalesService, SingleSalesRepository],
+  providers: [
+    CreateUseCase,
+    FindAllUseCase,
+    SingleSalesService,
+    SingleSalesRepository,
+  ],
   exports: [],
 })
 export class SingleSalesModule {}

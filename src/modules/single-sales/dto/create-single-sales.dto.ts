@@ -1,12 +1,8 @@
-import { Transform } from 'class-transformer';
 import { IsArray, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateSingleSalesDto {
   @IsString()
   name: string;
-
-  @IsNumber()
-  value: number;
 
   @IsNumber()
   discount: number;

@@ -22,37 +22,39 @@ export class CreateUseCase {
     try {
       this.logger.log('createSingleSalesDto', createSingleSalesDto);
 
-      await this.validateFields(
+      const value = await this.manageProducts(
         createSingleSalesDto.companyId,
         createSingleSalesDto.customerId,
         createSingleSalesDto.productIds,
+        createSingleSalesDto.discount || 0,
       );
 
-      for (const productId of createSingleSalesDto.productIds) {
-        const data: Prisma.SingleSalesUncheckedCreateInput = {
-          companyId: createSingleSalesDto.companyId,
-          customerId: createSingleSalesDto.customerId,
-          discount: createSingleSalesDto.discount,
-          name: createSingleSalesDto.name,
-          value: createSingleSalesDto.value,
-          products: {
-            connect: { id: productId },
-          },
-        };
+      const data: Prisma.SingleSalesUncheckedCreateInput = {
+        companyId: createSingleSalesDto.companyId,
+        customerId: createSingleSalesDto.customerId,
+        discount: createSingleSalesDto.discount,
+        name: createSingleSalesDto.name,
+        value,
+        products: {
+          connect: createSingleSalesDto.productIds.map((productId) => ({
+            id: productId,
+          })),
+        },
+      };
 
-        await this.singleSalesService.create(data);
-      }
+      await this.singleSalesService.create(data);
     } catch (error) {
       this.logger.warn('Error to create new single sales', error);
       throw error;
     }
   }
 
-  private async validateFields(
+  private async manageProducts(
     companyId: number,
     customerId: number,
     productIds: number[],
-  ): Promise<void> {
+    discount?: number,
+  ): Promise<number> {
     const [company, customer] = await Promise.all([
       this.companiesService.findById(companyId),
       this.customersService.findActiveById(customerId),
@@ -73,5 +75,13 @@ export class CreateUseCase {
     if (notFoundProducts.length) {
       throw new NotFoundException(`Products not found.`);
     }
+
+    const newValue = foundProducts
+      .filter((product) => product !== null)
+      .reduce((acc, product) => acc + product.value, 0);
+
+    const discountValue = discount ? newValue * (1 - discount / 100) : newValue;
+
+    return discountValue;
   }
 }
