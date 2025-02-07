@@ -7,11 +7,10 @@ import { FindAllUseCase } from './use-case/find-all.usecase';
 import { CreateUseCase } from './use-case/create.usecase';
 import { UpdateUseCase } from './use-case/update.usecase';
 import { DeleteUseCase } from './use-case/delete.usecase';
-import { CompaniesService } from '../companies/companies.service';
-import { CompaniesRepository } from '../companies/repository/companies.respository';
+import { CompaniesModule } from '../companies/companies.module';
 
 @Module({
-  imports: [SharedModule],
+  imports: [SharedModule, CompaniesModule],
   controllers: [ProductsController],
   providers: [
     ProductsService,
@@ -20,9 +19,7 @@ import { CompaniesRepository } from '../companies/repository/companies.resposito
     CreateUseCase,
     UpdateUseCase,
     DeleteUseCase,
-    CompaniesService,
-    CompaniesRepository,
   ],
-  exports: [],
+  exports: [ProductsService],
 })
 export class ProductsModule {}

@@ -19,6 +19,6 @@ import { DeleteUseCase } from './use-case/delete.usecase';
     UpdateUseCase,
     DeleteUseCase,
   ],
-  exports: [],
+  exports: [CompaniesService],
 })
 export class CompaniesModule {}
