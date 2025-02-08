@@ -8,6 +8,7 @@ import { ProductsModule } from '../products/products.module';
 import { SingleSalesService } from './single-sales.service';
 import { SingleSalesRepository } from './repository/single-sales.repository';
 import { FindAllUseCase } from './use-case/find-all.usecase';
+import { UpdateUseCase } from './use-case/update.usecase';
 
 @Module({
   imports: [SharedModule, CompaniesModule, CustomersModule, ProductsModule],
@@ -15,6 +16,7 @@ import { FindAllUseCase } from './use-case/find-all.usecase';
   providers: [
     CreateUseCase,
     FindAllUseCase,
+    UpdateUseCase,
     SingleSalesService,
     SingleSalesRepository,
   ],

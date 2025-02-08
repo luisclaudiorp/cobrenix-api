@@ -21,4 +21,10 @@ export class SingleSalesRepository {
       .getClient()
       .singleSales.findUnique({ where: { id } });
   }
+
+  async update(id: number, data: Prisma.SingleSalesUpdateInput) {
+    return this.prismaService
+      .getClient()
+      .singleSales.update({ where: { id }, data });
+  }
 }
