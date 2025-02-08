@@ -7,12 +7,4 @@ export class CreateCompaniesDto {
   @IsNotEmpty()
   @IsString()
   email: string;
-
-  @IsNotEmpty()
-  @IsString()
-  password: string;
-
-  @IsNotEmpty()
-  @IsString()
-  repetedPassword: string;
 }
