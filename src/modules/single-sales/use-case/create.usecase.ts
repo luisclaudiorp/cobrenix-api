@@ -86,6 +86,18 @@ export class CreateUseCase {
       throw new NotFoundException(`Products not found.`);
     }
 
+    const productsNotInCompany = foundProducts
+      .map((product, index) =>
+        product && product.companyId !== companyId ? productIds[index] : null,
+      )
+      .filter((id) => id !== null);
+
+    if (productsNotInCompany.length) {
+      throw new NotFoundException(
+        `Products with ID: (${productsNotInCompany.join(', ')}) do not belong to the company with ID ${companyId}.`,
+      );
+    }
+
     const newValue = foundProducts
       .filter((product) => product !== null)
       .reduce((acc, product) => acc + product.value, 0);
