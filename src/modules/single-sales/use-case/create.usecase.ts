@@ -66,6 +66,16 @@ export class CreateUseCase {
       );
     }
 
+    const customerInCompany = !!company.customers.find(
+      (customer) => customer.id == customerId,
+    );
+
+    if (customerInCompany === false) {
+      throw new NotFoundException(
+        `Customer with ID ${customerId} not found in Company with ID ${companyId}.`,
+      );
+    }
+
     const foundProducts = await Promise.all(
       productIds.map((productId) => this.productsService.findById(productId)),
     );

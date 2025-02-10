@@ -19,6 +19,7 @@ export class CompaniesRepository {
   async findById(id: number) {
     return this.prismaService.getClient().companies.findUnique({
       where: { id },
+      include: { customers: true, products: true },
     });
   }
 
