@@ -9,6 +9,7 @@ import { SingleSalesService } from './single-sales.service';
 import { SingleSalesRepository } from './repository/single-sales.repository';
 import { FindAllUseCase } from './use-case/find-all.usecase';
 import { UpdateUseCase } from './use-case/update.usecase';
+import { SaleRuleService } from 'src/shared/services/saleRule.service';
 
 @Module({
   imports: [SharedModule, CompaniesModule, CustomersModule, ProductsModule],
@@ -19,6 +20,7 @@ import { UpdateUseCase } from './use-case/update.usecase';
     UpdateUseCase,
     SingleSalesService,
     SingleSalesRepository,
+    SaleRuleService,
   ],
   exports: [],
 })
