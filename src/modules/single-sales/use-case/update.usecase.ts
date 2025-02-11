@@ -1,15 +1,11 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { SingleSalesService } from '../single-sales.service';
 import { UpdateSingleSalesDto } from '../dto/update.single-sales.dto';
-import { SaleRuleService } from 'src/shared/services/saleRule.service';
 
 @Injectable()
 export class UpdateUseCase {
   private logger: Logger;
-  constructor(
-    private readonly singleSalesService: SingleSalesService,
-    private readonly saleRuleService: SaleRuleService,
-  ) {
+  constructor(private readonly singleSalesService: SingleSalesService) {
     this.logger = new Logger(UpdateUseCase.name);
   }
 
@@ -23,19 +19,7 @@ export class UpdateUseCase {
         throw new NotFoundException('SingleSales not found');
       }
 
-      const value = await this.saleRuleService.manageProducts(
-        updateSingleSalesDto.companyId,
-        updateSingleSalesDto.customerId,
-        updateSingleSalesDto.productIds,
-        updateSingleSalesDto.discount || 0,
-      );
-
-      const updatedData = {
-        ...updateSingleSalesDto,
-        value,
-      };
-
-      return await this.singleSalesService.update(id, updatedData);
+      return await this.singleSalesService.update(id, updateSingleSalesDto);
     } catch (error) {
       this.logger.warn('Error to update SingleSales', error);
       throw error;

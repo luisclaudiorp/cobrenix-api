@@ -17,8 +17,11 @@ export class CompaniesRepository {
   }
 
   async findById(id: number) {
+    if (!id) {
+      throw new Error('Company id is required');
+    }
     return this.prismaService.getClient().companies.findUnique({
-      where: { id },
+      where: { id: id },
       include: { customers: true, products: true },
     });
   }
