@@ -35,5 +35,6 @@ export class FindAllSingleSalesDto {
 
   @IsOptional()
   @IsBoolean()
+  @Transform(({ value }) => (value === 'true' ? true : false))
   active: boolean;
 }

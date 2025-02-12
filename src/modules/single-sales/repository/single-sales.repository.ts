@@ -19,6 +19,16 @@ export class SingleSalesRepository {
   async findById(id: number) {
     return this.prismaService
       .getClient()
-      .singleSales.findUnique({ where: { id } });
+      .singleSales.findUnique({ where: { id }, include: { products: true } });
+  }
+
+  async update(id: number, data: Prisma.SingleSalesUpdateInput) {
+    return this.prismaService
+      .getClient()
+      .singleSales.update({ where: { id }, data });
+  }
+
+  async delete(id: number) {
+    return this.prismaService.getClient().singleSales.delete({ where: { id } });
   }
 }

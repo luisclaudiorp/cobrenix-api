@@ -1,31 +1,28 @@
 import {
-  IsArray,
-  IsNotEmpty,
+  IsBoolean,
   IsNumber,
+  IsOptional,
   IsString,
   Max,
   Min,
 } from 'class-validator';
 
-export class CreateSingleSalesDto {
+export class UpdateSingleSalesDto {
   @IsString()
+  @IsOptional()
   name: string;
 
   @IsNumber()
+  @IsOptional()
   @Min(1)
   @Max(100)
   discount: number;
 
-  @IsNotEmpty()
-  @IsNumber()
-  customerId: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  companyId: number;
-
-  @IsNotEmpty()
   @IsNumber({}, { each: true })
-  @IsArray()
+  @IsOptional()
   productIds: number[];
+
+  @IsBoolean()
+  @IsOptional()
+  active: boolean;
 }

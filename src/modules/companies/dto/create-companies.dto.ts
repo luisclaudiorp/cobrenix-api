@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsObject, IsOptional, IsString } from 'class-validator';
 
 export class CreateCompaniesDto {
   @IsString()
@@ -8,11 +8,7 @@ export class CreateCompaniesDto {
   @IsString()
   email: string;
 
-  @IsNotEmpty()
-  @IsString()
-  password: string;
-
-  @IsNotEmpty()
-  @IsString()
-  repetedPassword: string;
+  @IsOptional()
+  @IsObject()
+  config: object;
 }

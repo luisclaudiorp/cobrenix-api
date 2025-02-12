@@ -17,4 +17,12 @@ export class SingleSalesService {
   async findById(id: number) {
     return this.singleSalesRepository.findById(id);
   }
+
+  async update(id: number, data: Prisma.SingleSalesUpdateInput) {
+    return this.singleSalesRepository.update(id, data);
+  }
+
+  async delete(id: number) {
+    return this.singleSalesRepository.delete(id);
+  }
 }
