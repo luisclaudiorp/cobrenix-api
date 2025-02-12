@@ -21,4 +21,8 @@ export class SingleSalesService {
   async update(id: number, data: Prisma.SingleSalesUpdateInput) {
     return this.singleSalesRepository.update(id, data);
   }
+
+  async delete(id: number) {
+    return this.singleSalesRepository.delete(id);
+  }
 }

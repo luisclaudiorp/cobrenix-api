@@ -27,4 +27,8 @@ export class SingleSalesRepository {
       .getClient()
       .singleSales.update({ where: { id }, data });
   }
+
+  async delete(id: number) {
+    return this.prismaService.getClient().singleSales.delete({ where: { id } });
+  }
 }
