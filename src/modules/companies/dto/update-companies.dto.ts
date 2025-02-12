@@ -1,4 +1,4 @@
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsObject, IsOptional, IsString } from 'class-validator';
 
 export class UpdateCompaniesDto {
   @IsString()
@@ -12,4 +12,8 @@ export class UpdateCompaniesDto {
   @IsBoolean()
   @IsOptional()
   active: boolean;
+
+  @IsOptional()
+  @IsObject()
+  config: object;
 }
