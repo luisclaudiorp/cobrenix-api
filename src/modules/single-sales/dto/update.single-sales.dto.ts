@@ -7,10 +7,6 @@ export class UpdateSingleSalesDto {
 
   @IsNumber()
   @IsOptional()
-  value: number;
-
-  @IsNumber()
-  @IsOptional()
   discount: number;
 
   @IsNumber({}, { each: true })

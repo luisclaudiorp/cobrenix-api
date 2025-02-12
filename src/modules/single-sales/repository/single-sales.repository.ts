@@ -19,7 +19,7 @@ export class SingleSalesRepository {
   async findById(id: number) {
     return this.prismaService
       .getClient()
-      .singleSales.findUnique({ where: { id } });
+      .singleSales.findUnique({ where: { id }, include: { products: true } });
   }
 
   async update(id: number, data: Prisma.SingleSalesUpdateInput) {
