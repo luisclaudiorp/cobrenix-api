@@ -1,4 +1,11 @@
-import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 
 export class UpdateSingleSalesDto {
   @IsString()
@@ -7,6 +14,8 @@ export class UpdateSingleSalesDto {
 
   @IsNumber()
   @IsOptional()
+  @Min(1)
+  @Max(100)
   discount: number;
 
   @IsNumber({}, { each: true })

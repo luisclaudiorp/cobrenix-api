@@ -1,10 +1,19 @@
-import { IsArray, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  Max,
+  Min,
+} from 'class-validator';
 
 export class CreateSingleSalesDto {
   @IsString()
   name: string;
 
   @IsNumber()
+  @Min(1)
+  @Max(100)
   discount: number;
 
   @IsNotEmpty()
