@@ -13,7 +13,7 @@ export class TransactionService {
   async run<T>(fn: () => Promise<T>) {
     const prisma = this.prismaService.getClient() as PrismaClient;
 
-    const isPrismaTransactionClient = !prisma.$transaction;
+    const isPrismaTransactionClient = prisma['_transactionId'] !== undefined;
 
     /**
      * If already has a open transaction in the context,
@@ -35,8 +35,8 @@ export class TransactionService {
         }
       },
       {
-        timeout: Number(process.env.PRISMA_TIMEOUT),
-        maxWait: Number(process.env.PRISMA_MAX_WAIT),
+        timeout: Number(process.env.PRISMA_TIMEOUT) || 10000,
+        maxWait: Number(process.env.PRISMA_MAX_WAIT) || 2000,
       },
     );
   }
